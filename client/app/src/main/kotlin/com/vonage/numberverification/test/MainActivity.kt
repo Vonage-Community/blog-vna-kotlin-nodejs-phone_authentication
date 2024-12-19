@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.vonage.numberverification.VGNumberVerificationClient
-import com.vonage.numberverification.VGNumberVerificationParameters
+import com.vonage.clientlibrary.VGCellularRequestClient
+import com.vonage.clientlibrary.VGCellularRequestParameters
 import com.vonage.numberverification.test.ui.theme.NumberVerificationTheme
 import kotlinx.coroutines.*
 import okhttp3.*
@@ -27,7 +27,7 @@ const val LOGIN_URL = "https://your-backend-url/login"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        VGNumberVerificationClient.initializeSdk(this.applicationContext)
+        VGCellularRequestClient.initializeSdk(this.applicationContext)
         setContent {
             NumberVerificationApp()
         }
@@ -66,7 +66,7 @@ suspend fun sendLogin(url: String, phoneNumber: String): Result<String> {
 
 // Function to send the auth request using the SDK
 suspend fun sendAuthRequest(url: String): Result<Boolean> {
-    val params = VGNumberVerificationParameters(
+    val params = VGCellularRequestParameters(
         url = url,
         headers = emptyMap(),
         queryParameters = emptyMap(),
@@ -74,8 +74,8 @@ suspend fun sendAuthRequest(url: String): Result<Boolean> {
     )
 
     return withContext(Dispatchers.IO) {
-        val response = VGNumberVerificationClient.getInstance()
-            .startNumberVerification(params, true)
+        val response = VGCellularRequestClient.getInstance()
+            .startCellularGetRequest(params, true)
 
         val status = response.optInt("http_status")
         val isVerified = response.optJSONObject("response_body")

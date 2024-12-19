@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.vonage.numberverification.test"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.vonage.numberverification.test"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -50,8 +50,7 @@ android {
 }
 
 dependencies {
-    implementation("com.vonage:client-sdk-number-verification:1.1.1")
-
+    implementation("com.vonage:client-library:1.0.0")
     implementation("androidx.activity:activity-compose:1.9.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation(platform("androidx.compose:compose-bom:2024.11.00"))
